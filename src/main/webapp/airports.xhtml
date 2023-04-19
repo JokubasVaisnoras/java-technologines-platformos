@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+   <nav>
+      <h:link value="Planes" outcome="index"/>
+      <h:link value="Airports" outcome="airports"/>
+      <h:link value="Search for planes" outcome="PlaneSearch"/>
+   </nav>
+   <ui:repeat value="#{airportUC.allAirports}" var="airport">
+      <h1>#{airport.name}</h1>
+      <h2>Planes: </h2>
+      <ol>
+         <ui:repeat value="#{airport.planes}" var="plane">
+            <li><h:link value="#{plane.airline}" outcome="passengers?planeId=#{plane.planeId}" /></li>
+         </ui:repeat>
+      </ol>
+
+   </ui:repeat>
+</h:body>
+</html>

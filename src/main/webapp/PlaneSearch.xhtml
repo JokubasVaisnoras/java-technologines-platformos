@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+   <h2>Search for a Plane: </h2>
+   <h:form>
+      <h:inputText value="#{planesUC.planeToSearchFor}" required="true"/>
+      <h:commandButton value="Search for a plane" actionListener="#{planesUC.loadSearchedPlane}"/>
+   </h:form>
+
+   <ol>
+      <ui:repeat value="#{planesUC.searchedPlanes}" var="plane">
+         <li><h:link value="#{plane.airline} #{plane.model}" outcome="passengers?planeId=#{plane.planeId}" /></li>
+      </ui:repeat>
+   </ol>
+</h:body>
+</html>

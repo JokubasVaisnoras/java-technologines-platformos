@@ -3,19 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 <h:head/>
 <h:body>
-    <h2>Teams:</h2>
+
+    <nav>
+        <h:link value="Planes" outcome="index"/>
+        <h:link value="Airports" outcome="airports"/>
+        <h:link value="Search for planes" outcome="PlaneSearch"/>
+    </nav>
+
+
+
+    <h2>Planes:</h2>
     <ol>
-        <ui:repeat value="#{teams.allTeams}" var="team">
-            <li><h:link value="#{team.name}" outcome="players?teamId=#{team.id}" /></li>
+        <ui:repeat value="#{planesUC.allPlanes}" var="plane">
+            <li><h:link value="#{plane.airline} (#{plane.passengers.size()})" outcome="passengers?planeId=#{plane.planeId}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{teams.teamToCreate.name}" required="true" />
-        <h:commandButton value="Add new team" actionListener="#{teams.createTeam}" action="index?faces-redirect=true"/>
+        <label>airline</label>
+        <h:inputText value="#{planesUC.planeToCreate.airline}" required="true" /><br></br>
+        <h:selectManyCheckbox  value="#{planesUC.planeToCreate.airports}">
+            <f:selectItems value="#{airportUC.allAirports}" var="airport" itemValue="#{airport}" itemLabel="#{airport.name}"/>
+        </h:selectManyCheckbox>
+        <label>model</label>
+        <h:inputText value="#{planesUC.planeToCreate.model}" required="true" /><br></br>
+        <h:commandButton value="Add new plane model" actionListener="#{planesUC.createPlane}" action="index?faces-redirect=true"/>
     </h:form>
-    <h:link outcome="myBatis/teams" value="MyBatis implementation"/>
+
+
+
+    <h:link outcome="myBatis/planes" value="MyBatis implementation"/>
 </h:body>
 </html>

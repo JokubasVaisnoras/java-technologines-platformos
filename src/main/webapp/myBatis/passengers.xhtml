@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+   <h2>Passengers in #{passengersUC.plane.airline} plane:</h2>
+   <ol>
+      <ui:repeat value="#{passengersUC.plane.passengers}" var="passenger">
+         <li>
+            value="name :#{passenger.name}  last name:#{passenger.last_name} age:#{passenger.age}"
+         </li>
+      </ui:repeat>
+   </ol>
+   <h:form>
+      <label>name</label>
+      <h:inputText a:placeholder="name" value="#{passengersUC.passengerToCreate.name}" required="true" /><br></br>
+      <label>last name</label>
+      <h:inputText a:placeholder="last name" value="#{passengersUC.passengerToCreate.last_name}" required="true" /><br></br>
+      <label>name</label>
+      <h:inputText type="number" a:placeholder="age" value="#{passengersUC.passengerToCreate.age}" required="true" /><br></br>
+
+      <h:commandButton value="Add passenger to the plane"
+                       action="#{passengersUC.createPassenger}">
+         <f:param name="planeId" value="#{passengersUC.plane.planeId}" />
+      </h:commandButton>
+      <h:link outcome="/myBatis/planes" value="Back to Planes Page"/>
+   </h:form>
+</h:body>
+</html>
